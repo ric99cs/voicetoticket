@@ -1,7 +1,7 @@
 <?php
         define('Zammad_Endpoint', 'your zammad endpoint');
         define('Zammad_Token', 'token=your zammad token');
-        define('Microsoft_Endpoint', 'https://westeurope.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1');
+        define('Microsoft_Endpoint', 'https://westeurope.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=de-DE'); //use the correct endpoint for your location or language
         define('Microsoft_Token', 'your microsoft stt token');
         define('Mail_From', 'example@example.com');
         define('From_Name', 'IP-PBX');
