@@ -29,7 +29,7 @@ if ($userid == 0) {
 $postdata = array(
     "title" => "New voicemail on your PBX",
     "customer_id" => $userid,
-    "group_id" => zammad_group,
+    "group_id" => Zammad_Group,
     "article" => array(
         "subject" => "New Message",
         "body" => $htmlContent,
