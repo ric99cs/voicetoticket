@@ -7,14 +7,14 @@ include('functions.php');
 $file = $argv[1];
 $cid = $argv[2];
 
-$url = Microsoft_Endpoint."?language=de-DE";
+$url = Microsoft_Endpoint;
 $result = CallAPI('POST',$url,Microsoft_Headers,file_get_contents($file));
 $jdecode = json_decode($result);
 
 if ($jdecode->RecognitionStatus == 'Success') {
-    $htmlContent = "Es gibt eine neue Nachricht von der Rufnummer " . $cid . "<br />Folgender Text wurde erkannt:<br><br><strong>" . $jdecode->DisplayText . "</strong><br /><br />Die Nachricht ist zum Nachhören als Anhang beigefügt.";
+    $htmlContent = "There is a new voicemail from the caller " . $cid . "<br />The following message was detected:<br><br><strong>" . $jdecode->DisplayText . "</strong><br /><br />The voicemail is attached as audio file.";
 } else {
-    $htmlContent = "Es gibt eine neue Nachricht von der Rufnummer " . $cid . "<br />Die Nachricht konnte nicht erkannt werden!<br /><br />Die Nachricht ist zum Nachhören als Anhang beigefügt.";
+    $htmlContent = "There is a new voicemail from the caller " . $cid . "<br />The message text could not be detected!<br /><br />The voicemail is attached as audio file.";
 }
 
 $userid = GetUser($cid);
@@ -27,11 +27,11 @@ if ($userid == 0) {
 }
 
 $postdata = array(
-    "title" => "Neue Nachricht auf dem Anrufbeantworter",
+    "title" => "New voicemail on your PBX",
     "customer_id" => $userid,
-    "group_id" => 14,
+    "group_id" => zammad_group,
     "article" => array(
-        "subject" => "Neue Nachricht",
+        "subject" => "New Message",
         "body" => $htmlContent,
         "content_type" => "text/html",
         "type" => "note",
