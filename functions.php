@@ -1,6 +1,7 @@
 <?php
 	require('config.php');
 
+	//function to call the different REST-APIs
 	function CallAPI($method, $url, $headers, $data = false)
 	{
 	
@@ -28,6 +29,7 @@
 	    return $result;
 	}
 
+	//e-mail detected text and audio attachment to the given recipient
 	function sendMailWithAttachment($to, $file, $subject, $body)
 	{
 	    $from = Mail_From;
@@ -64,6 +66,7 @@
 	    echo $mail ? "<h1>Email Sent Successfully!</h1>" : "<h1>Email sending failed.</h1>";
 	}
 
+	//return Base64-encoded file
 	function GetBase64($file)
 	{
 	    $filesize = filesize($file);
@@ -74,6 +77,7 @@
 	    return $base64;
 	}
 
+	//create a new user and fill the phone field with his caller id
 	function NewUser($cid)
 	{
 	    $data = '{"phone": "' . $cid . '","roles":["Customer"]}';
@@ -83,6 +87,9 @@
 	    return $userid;
 	}
 
+	
+	//search for user-id in zammad by mobile or phone number, if there are multiple users, then the one with the highest id will be returned
+	//if users in the result had an e-mail address, then this user id is returned
 	function GetUser($cid)
 	{
 	    $result = CallAPI('GET', Zammad_Endpoint.'/users/search?query=phone%3A' . $cid . '%20OR%20mobile%3A' . $cid, Zammad_Headers);
