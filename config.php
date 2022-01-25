@@ -5,6 +5,7 @@
         define('Microsoft_Token', 'your microsoft stt token');
         define('Mail_From', 'example@example.com');
         define('From_Name', 'IP-PBX');
+        define('Zammad_Group', 0); //use the id of the group, where new voicemail tickets should appear
 
         $ms_headers = array(
             'Ocp-Apim-Subscription-Key: '.Microsoft_Token,
